@@ -25,6 +25,8 @@ coverage/
 # Google Cloud credentials
 *.json
 !package.json
+!package-lock.json
+!.changeset/config.json
 
 # IDE files
 .vscode/

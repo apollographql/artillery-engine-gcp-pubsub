@@ -4,7 +4,9 @@
   "description": "Artillery engine for Google Cloud Pub/Sub load testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config tests/jest.config.js",
+    "test:watch": "jest --watch --config tests/jest.config.js",
+    "test:coverage": "jest --coverage --config tests/jest.config.js"
   },
   "keywords": [
     "artillery",
@@ -19,6 +21,10 @@
     "async": "^3.2.4",
     "debug": "^4.3.4",
     "@google-cloud/pubsub": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sinon": "^17.0.1"
   },
   "engines": {
     "node": ">=14.0.0"

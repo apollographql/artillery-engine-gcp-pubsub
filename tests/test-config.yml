@@ -1,0 +1,42 @@
+# Test configuration for Artillery GCP Pub/Sub Engine
+config:
+  engine: "gcp-pubsub"
+  target: "http://localhost"
+  
+  phases:
+    - duration: 10
+      arrivalRate: 5
+  
+  engines:
+    gcppubsub:
+      dryrun: true  # Use dryrun for testing
+  
+  environments:
+    test:
+      project: "test-project"
+      topic: "test-topic"
+  
+  payload:
+    - path: "test-data.csv"
+      fields:
+        - "userId"
+        - "messageType"
+
+scenarios:
+  - name: "Test message publishing"
+    flow:
+      - log: "Starting test scenario"
+      - think: 100
+      - message:
+          multiplier: 1
+          json:
+            userId: "{{ userId }}"
+            messageType: "{{ messageType }}"
+            message: "Test message from Artillery"
+            timestamp: "{{ $timestamp }}"
+            randomId: "{{ $randomNumber(1, 1000) }}"
+          attributes:
+            source: "artillery-test"
+            environment: "test"
+      - think: 200
+      - log: "Test scenario completed"

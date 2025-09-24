@@ -1,0 +1,56 @@
+config:
+  # Required: Tell Artillery to use the gcppubsub engine
+  engine: "gcp-pubsub"
+  
+  # Required: Artillery needs a target URL (unused by this engine)
+  target: "http://localhost"
+  
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  
+  # Engine-specific configuration
+  engines:
+    gcppubsub:
+      # Set to true to skip publishing messages (but Pub/Sub channel is still set up)
+      dryrun: false
+  
+  # Environment-specific settings (accessed via -e flag)
+  environments:
+    staging:
+      # The project that contains the topic to publish to
+      project: "my-gcp-project"
+      # The topic to publish to
+      topic: "my-test-topic"
+    production:
+      project: "my-gcp-project-prod"
+      topic: "my-production-topic"
+  
+  # Optional: CSV data for parameterized testing
+  payload:
+    - path: "test-data.csv"
+      fields:
+        - "userId"
+        - "messageType"
+
+scenarios:
+  - name: "Publish messages to Pub/Sub"
+    flow:
+      - message:
+          # It is inefficient for each virtual user to publish a single message to a
+          # pubsub topic, so instead a batch of messages will be published at once.
+          # A random orderingId will be evaluated for each message (though duplicates
+          # may occur if the range is low). The GCP client will publish in batchs of 
+          # at most 1000 messages, so a multiplier above that will incur roughly the
+          # same overhead as an additional virtual user, so is not recommended.
+          multiplier: 1
+          json:
+            # The payload to publish. 
+            userId: "{{ userId }}"
+            messageType: "{{ messageType }}"
+            message: "Hello from Artillery!"
+            randomId: "{{ $randomNumber(1, 1000) }}"
+          # Optional: Message attributes for Pub/Sub
+          attributes:
+            source: "artillery-test"
+            environment: "{{ $environment }}"

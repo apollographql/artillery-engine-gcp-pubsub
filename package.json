@@ -1,0 +1,26 @@
+{
+  "name": "engine-gcp-pubsub",
+  "version": "1.0.0",
+  "description": "Artillery engine for Google Cloud Pub/Sub load testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "artillery",
+    "load-testing",
+    "gcp",
+    "pubsub",
+    "google-cloud"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.4",
+    "debug": "^4.3.4",
+    "@google-cloud/pubsub": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

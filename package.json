@@ -1,5 +1,5 @@
 {
-  "name": "engine-gcp-pubsub",
+  "name": "artillery-engine-gcp-pubsub",
   "version": "1.0.0",
   "description": "Artillery engine for Google Cloud Pub/Sub load testing",
   "main": "index.js",

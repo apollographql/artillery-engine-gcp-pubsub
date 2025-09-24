@@ -9,6 +9,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: 
+      name: release
     if: github.repository == 'apollographql/artillery-engine-gcp-pubsub'
     steps:
       - name: Checkout Repo

@@ -1,6 +1,9 @@
 {
   "name": "artillery-engine-gcp-pubsub",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Artillery engine for Google Cloud Pub/Sub load testing",
   "main": "index.js",
   "scripts": {

@@ -23,7 +23,7 @@
   "dependencies": {
     "async": "^3.2.4",
     "debug": "^4.3.4",
-    "@google-cloud/pubsub": "^4.0.0"
+    "@google-cloud/pubsub": "^5.0.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
